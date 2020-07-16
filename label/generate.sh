@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# All right reserved
+# Gardenzilla
+# Peter Mezei
+# 2020
+# Licensed under GNU GPLv3
+
 if [ $# -eq 0 ]
     then
         echo "Generate Gardenzilla UPL QR codes between a given INT range"
