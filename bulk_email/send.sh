@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Loading env file
+if [ -f .env ]
+then
+  export $(grep -v '^#' .env | xargs)
+fi
+
 # Regular Colors
 Black='\033[0;30m'        # Black
 Red='\033[0;31m'          # Red
@@ -76,12 +82,12 @@ for i in "${!messages[@]}"
 do
   echo Sending email to ${addresses[$i]}
   echo "${messages[$i]}" | mailx \
-      -r "mezeipetister@gmail.com" \
+      -r "${FROM}" \
       -s "${subject}" \
       -S smtp="smtp.gmail.com:587" \
       -S smtp-use-starttls \
       -S smtp-auth=login \
-      -S smtp-auth-user="mezeipetister@gmail.com" \
-      -S smtp-auth-password="szyfgvcbxyngrpdt" \
+      -S smtp-auth-user="${USERNAME}" \
+      -S smtp-auth-password="${PASSWD}" \
       -S ssl-verify=ignore   ${addresses[$i]}
 done
