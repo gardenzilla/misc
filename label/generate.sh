@@ -27,7 +27,7 @@ fi
 
 FIRST=$1
 LAST=$2
-DIR="output"
+DIR="output/output_${FIRST}_${LAST}"
 
 # Clean up output dir
 rm -rf $DIR
@@ -38,7 +38,8 @@ mkdir -p $DIR
 for (( i = $FIRST; i <= $LAST; i++ )) 
 do 
     echo -ne \\r"Processing QR codes $LAST/$i"
-    qrencode -o $DIR/$i.svg 'http://gardenzilla.hu/upl/'$i -t SVG
+    code=$(gzid create $i)
+    qrencode -o $DIR/${code^^}.svg 'https://gardenzilla.hu/uinfo/'$code -t SVG
 done
 
 echo ""
